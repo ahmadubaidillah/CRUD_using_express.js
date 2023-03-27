@@ -1,12 +1,12 @@
 //connect to database
-
+require("dotenv").config();
 const pg = require("pg");
 const db = new pg.Pool({
-  host: "localhost",
-  user: "postgres",
-  password: "opera890",
-  database: "db_food_recipe",
-  port: "5432",
+  host: process.env.db_host,
+  user: process.env.db_user,
+  password: process.env.db_password,
+  database: process.env.db_database,
+  port: process.env.db_port,
 });
 
 // Check connection

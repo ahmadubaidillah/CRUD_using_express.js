@@ -57,7 +57,7 @@ const userModel = {
     return new Promise((resolve, reject) => {
       db.query(`select * from users where email='${email}'`, (err, result) => {
         if (err) {
-          reject(err);
+          reject("LOGIN GAGAL");
         }
         resolve(result);
       });

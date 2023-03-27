@@ -53,13 +53,14 @@ const userController = {
   },
   login: (req, res) => {
     const email = req.body;
-    userModel.loginUser(res.json({ massage: "LOGIN SUCCES", email }));
-    // .then((result) => {
-    //   res.json({ messasge: "LOGIN SUCCES", result });
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
+    userModel
+      .loginUser(email)
+      .then((result) => {
+        res.json({ messasge: "LOGIN SUCCES", result });
+      })
+      .catch((err) => {
+        res.json({ messasge: "LOGIN GAGAL", err });
+      });
   },
 };
 module.exports = userController;

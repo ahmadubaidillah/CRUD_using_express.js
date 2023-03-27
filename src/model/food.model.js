@@ -53,9 +53,20 @@ const foodModel = {
     });
   },
 
-  filter: (name) => {
+  searchByName: ({ name }) => {
     return new Promise((resolve, reject) => {
-      db.query(`select * from foods where name=${name}`, (err, result) => {
+      db.query(`select*from foods where name='${name}'`, (err, result) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(result);
+      });
+    });
+  },
+
+  sortByNameAsc: () => {
+    return new Promise((resolve, reject) => {
+      db.query(`select*from foods order by name asc`, (err, result) => {
         if (err) {
           reject(err);
         }
