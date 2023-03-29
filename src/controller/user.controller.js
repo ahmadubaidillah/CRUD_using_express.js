@@ -1,4 +1,5 @@
 const userModel = require("../model/user.model");
+const { response } = require("../helper/response");
 
 const userController = {
   // Get Data
@@ -6,7 +7,7 @@ const userController = {
     userModel
       .selectAll()
       .then((result) => {
-        res.json(result);
+        response(res, result.rows, 200, "GET DATA SUCCES");
       })
       .catch((err) => {
         console.log(err);
