@@ -53,14 +53,28 @@ const userModel = {
     });
   },
 
-  loginUser: ({ email }) => {
+  loginUser: (email) => {
     return new Promise((resolve, reject) => {
-      db.query(`select * from users where email='${email}'`, (err, result) => {
+      db.query(`select * from users where email='${email}' `, (err, result) => {
         if (err) {
-          reject("LOGIN GAGAL");
+          reject(err);
         }
         resolve(result);
       });
+    });
+  },
+
+  paginate: (limit, offset) => {
+    return new Promise((resolve, reject) => {
+      db.query(
+        `select * from users limit ${limit} offset ${offset}`,
+        (err, res) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(res);
+        }
+      );
     });
   },
 };
