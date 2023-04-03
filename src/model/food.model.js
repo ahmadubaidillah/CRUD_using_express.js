@@ -74,6 +74,17 @@ const foodModel = {
       });
     });
   },
+
+  selectById: (id) => {
+    return new Promise((resolve, reject) => {
+      db.query(`select*from foods where id='${id}'`, (err, result) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(result);
+      });
+    });
+  },
 };
 
 module.exports = foodModel;

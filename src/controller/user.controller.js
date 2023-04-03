@@ -1,5 +1,6 @@
 const userModel = require("../model/user.model");
 const { response } = require("../helper/response");
+const { responseError } = require("../helper/response");
 const bcrypt = require("bcrypt");
 const jwtToken = require("../helper/generateSecret");
 
@@ -18,12 +19,12 @@ const userController = {
 
   register: async (req, res) => {
     try {
-      const { id, name, email, password } = req.body;
+      const { id, name, email, password, level } = req.body;
       bcrypt.hash(password, 10, (err, hash) => {
         if (err) {
           res.json({ message: "failed hash password" });
         }
-        const data = { id, name, email, password: hash };
+        const data = { id, name, email, password: hash, level };
         userModel
           .insert(data)
           .then((result) => {
@@ -68,6 +69,7 @@ const userController = {
     userModel
       .loginUser(email)
       .then((data) => {
+        const userAuth = data.rows[0].level;
         // res.json({ messasge: "LOGIN SUCCES", result });
         if (data.rowCount > 0) {
           bcrypt
@@ -76,6 +78,7 @@ const userController = {
               if (result) {
                 const token = await jwtToken({
                   email: result.rows,
+                  level: userAuth,
                 });
                 res.json({
                   message: "OK",
@@ -121,7 +124,7 @@ const userController = {
         });
       })
       .catch((err) => {
-        res.json({ messasge: "PAGINATION GAGAL", err });
+        responseError(res, err, 400, "data error");
       });
   },
 };

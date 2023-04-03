@@ -7,5 +7,14 @@ const response = (res, result, status, message) => {
   resultPrint.message = message || null;
   res.status(status).json(resultPrint);
 };
+const responseError = (res, result, status, message) => {
+  const resultPrint = {};
 
-module.exports = { response };
+  resultPrint.status = "gagal";
+  resultPrint.statusCode = status;
+  resultPrint.data = result;
+  resultPrint.message = message || null;
+  res.status(status).json(resultPrint);
+};
+
+module.exports = { response, responseError };

@@ -1,5 +1,7 @@
 const foodModel = require("../model/food.model");
-const { response } = require("../helper/response");
+const { response, responseError } = require("../helper/response");
+const clientRedis = require("../config/redis");
+const fs = require("fs-extra");
 
 const foodController = {
   // Get Data
@@ -15,7 +17,8 @@ const foodController = {
   },
 
   add: (req, res) => {
-    const { id, name, ingredients, image, video } = req.body;
+    const { id, name, ingredients, video } = req.body;
+    const image = req.file.filename;
     const data = { id, name, ingredients, image, video };
 
     foodModel
@@ -29,7 +32,8 @@ const foodController = {
   },
 
   edit: (req, res) => {
-    const { id, name, ingredients, image, video } = req.body;
+    const { id, name, ingredients, video } = req.body;
+    const image = req.file.filename;
     const data = { id, name, ingredients, image, video };
 
     foodModel
@@ -44,7 +48,9 @@ const foodController = {
 
   remove: (req, res) => {
     const id = req.params.id;
+
     const body = req.body;
+    fs.unlinkSync(`${id}`);
     const data = { id, body };
     foodModel
       .cut(data)
@@ -57,9 +63,11 @@ const foodController = {
   },
 
   search: (req, res) => {
-    const name = req.body;
+    const name = req.params.name;
+    const body = req.body;
+    const data = { name, body };
     foodModel
-      .searchByName(name)
+      .searchByName(data)
       .then((result) => {
         res.json({ messasge: "SEARCH BY NAME", result });
       })
@@ -76,6 +84,29 @@ const foodController = {
       })
       .catch((err) => {
         console.log(err);
+      });
+  },
+
+  getById: (req, res) => {
+    const id = req.params.id;
+    foodModel
+      .selectById(id)
+      .then((result) => {
+        const dataRedis = clientRedis.set(
+          `getFromRedis/${id}`,
+          JSON.stringify(result),
+          {
+            EX: 180,
+            NX: true,
+          }
+        );
+        res.send({
+          fromCache: false,
+          data: dataRedis,
+        });
+      })
+      .catch((err) => {
+        responseError(res, err.messasge, 400, "get id failed");
       });
   },
 };

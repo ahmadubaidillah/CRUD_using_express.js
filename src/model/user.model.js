@@ -14,10 +14,10 @@ const userModel = {
     });
   },
 
-  insert: ({ id, name, email, password }) => {
+  insert: ({ id, name, email, password, level }) => {
     return new Promise((resolve, reject) => {
       db.query(
-        `insert into users (id,name,email,password) values (${id},'${name}','${email}','${password}')`,
+        `insert into users (id,name,email,password,level) values (${id},'${name}','${email}','${password}',${level})`,
         (err, result) => {
           if (err) {
             reject(err);
