@@ -8,21 +8,15 @@
 	"item": [
 		{
 			"name": "get_data_user",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsZXZlbCI6MCwiaWF0IjoxNjgwNDk3MTE5LCJleHAiOjE2ODA1MDA3MTl9.Waj5eV6pv_lQqPg5ZM_ND7ia96zjAquqYCamTTtTgg4",
+						"type": "text"
 					}
-				},
+				],
 				"url": {
 					"raw": "localhost:4000/user",
 					"host": [
@@ -42,13 +36,39 @@
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\":3,\r\n    \"name\":\"abi3\",\r\n    \"email\":\"abi3@gmail.com\",\r\n    \"password\":\"123\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "abi10",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "abi10@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "level",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "gambar",
+							"type": "file",
+							"src": "/C:/Users/ASUS/Pictures/Background Meet-02 (1).jpg"
 						}
-					}
+					]
 				},
 				"url": {
 					"raw": "localhost:4000/user_register",
@@ -124,7 +144,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n     \"email\":\"abiaaa@gmail.com\",\r\n    \"password\":\"1234\"\r\n}",
+					"raw": "{\r\n    \"email\":\"abi9@gmail.com\",\r\n    \"password\":\"123\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -139,6 +159,45 @@
 					"port": "4000",
 					"path": [
 						"user_login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_pagination",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "page",
+						"value": "2",
+						"type": "text"
+					},
+					{
+						"key": "limit",
+						"value": "3",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:4000/user_pagination?page=2&limit=3",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"user_pagination"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						},
+						{
+							"key": "limit",
+							"value": "3"
+						}
 					]
 				}
 			},
@@ -168,13 +227,34 @@
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\":3,\r\n    \"name\":\"brownis\",\r\n    \"ingredients\":\"1.buat adonan\",\r\n    \"image\":\"brownis.jpg\",\r\n    \"video\":\"brownis.mp4\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "brownis",
+							"type": "text"
+						},
+						{
+							"key": "ingredients",
+							"value": "1.buat adonan",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/ASUS/Pictures/Resep-Brownies-Panggang-dan-Tips-Membuatnya-1024x683.jpg"
+						},
+						{
+							"key": "video",
+							"value": "brownis.mp4",
+							"type": "text"
 						}
-					}
+					]
 				},
 				"url": {
 					"raw": "localhost:4000/food_add",
@@ -195,13 +275,34 @@
 				"method": "PUT",
 				"header": [],
 				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"id\":2,\r\n    \"name\":\"brownis update\",\r\n    \"ingredients\":\"1.buat adonan\",\r\n    \"image\":\"brownis.jpg\",\r\n    \"video\":\"brownis.mp4\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "brownis update",
+							"type": "text"
+						},
+						{
+							"key": "ingredients",
+							"value": "update",
+							"type": "text"
+						},
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/ASUS/Pictures/Wallpaper/742586.jpg"
+						},
+						{
+							"key": "video",
+							"value": "update.mp4",
+							"type": "text"
 						}
-					}
+					]
 				},
 				"url": {
 					"raw": "localhost:4000/food_edit",
@@ -237,29 +338,18 @@
 		},
 		{
 			"name": "search_food_by_name",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"pancake\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "localhost:4000/food_search",
+					"raw": "localhost:4000/food_search/pancake",
 					"host": [
 						"localhost"
 					],
 					"port": "4000",
 					"path": [
-						"food_search"
+						"food_search",
+						"pancake"
 					]
 				}
 			},
@@ -278,6 +368,26 @@
 					"port": "4000",
 					"path": [
 						"food_sort"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_food_by_Id_with_redis",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4000/v1/getFromRedis/1",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"v1",
+						"getFromRedis",
+						"1"
 					]
 				}
 			},
