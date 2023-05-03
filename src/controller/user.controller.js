@@ -69,7 +69,7 @@ const userController = {
     userModel
       .loginUser(email)
       .then((data) => {
-        const userAuth = data.rows[0].level;
+        // const userAuth = data.rows[0].level;
         // res.json({ messasge: "LOGIN SUCCES", result });
         if (data.rowCount > 0) {
           bcrypt
@@ -78,7 +78,7 @@ const userController = {
               if (result) {
                 const token = await jwtToken({
                   email: result.rows,
-                  level: userAuth,
+                  // level: userAuth,
                 });
                 res.json({
                   message: "OK",
